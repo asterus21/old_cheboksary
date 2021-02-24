@@ -11,7 +11,7 @@ def get_photo():
 
 	pictures, names = [], []
 	#check range from 0 up to 225000 but not all values at once
-	for i in range(10001, 20001):
+	for i in range(3650, 3661):
 
 		page = requests.get(f'https://foto.cheb.ru/foto/{i}.htm')
 		soup = BeautifulSoup(page.text, 'lxml')
@@ -30,8 +30,11 @@ def get_photo():
 			for photo in photos:
 				pictures.append(photo['src'])
 
+		else:
+			continue
+
 	url = ['https://foto.cheb.ru' + picture for picture in pictures]
-	dict_ = dict(zip(names,url))
+	dict_ = dict(zip(names, url))
 
 	for url_ in url:
 		urllib.request.urlretrieve(url_, url_.split("-")[-1])
